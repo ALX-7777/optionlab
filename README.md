@@ -1,6 +1,6 @@
 # OptionLab
 
-[![CI](https://github.com/<your-username>/optionlab/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-username>/optionlab/actions/workflows/ci.yml)
+[![CI](https://github.com/ALX-7777/optionlab/actions/workflows/ci.yml/badge.svg)](https://github.com/ALX-7777/optionlab/actions/workflows/ci.yml)
 ![Python 3.13](https://img.shields.io/badge/python-3.13-blue)
 ![uv](https://img.shields.io/badge/managed%20with-uv-purple)
 ![Streamlit](https://img.shields.io/badge/app-Streamlit-red)
@@ -64,7 +64,7 @@ OptionLab prices European options with Black-Scholes and plots every Greek again
 Requirements: [uv](https://docs.astral.sh/uv/) and Git. Docker is optional.
 
 ```bash
-git clone https://github.com/<your-username>/optionlab.git
+git clone https://github.com/ALX-7777/optionlab.git
 cd optionlab
 uv sync                          # creates .venv and installs the exact versions from uv.lock
 uv run streamlit run app.py      # opens the app at http://localhost:8501
