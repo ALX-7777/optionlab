@@ -48,7 +48,7 @@ OptionLab prices European options with Black-Scholes and plots every Greek again
 **Book management**
 - Trades, cash and positions, with aggregated Greeks and dollar Greeks
 - Risk ladders, spot × volatility scenario grids and stress tests
-- Hedging: delta hedging, neutralising any Greek with a chosen instrument, or several Greaks at once (e.g. delta-gamma neutral)
+- Hedging: delta hedging, neutralising any Greek with a chosen instrument, or several Greeks at once (e.g. delta-gamma neutral)
 - Save and load a book as JSON
 
 **Trading simulator**
