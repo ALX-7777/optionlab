@@ -12,6 +12,18 @@ OptionLab prices European options with Black-Scholes and plots every Greek again
 
 ---
 
+## Links
+
+- **Source code:** https://github.com/ALX-7777/optionlab
+- **Docker image:** https://hub.docker.com/r/alix777/optionlab
+
+Run the app without installing anything:
+
+```bash
+docker run --rm -p 8501:8501 alix777/optionlab
+```
+Then open http://localhost:8501.
+
 ## Features
 
 **Vanilla options**
