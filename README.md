@@ -24,6 +24,17 @@ docker run --rm -p 8501:8501 alix777/optionlab
 ```
 Then open http://localhost:8501.
 
+## What it looks like
+
+![Gamma against spot, at several times to expiry](docs/gamma-vs-spot.png)
+
+*Gamma of a 100-strike call against the spot, drawn at several times to expiry. The curve tightens and grows as expiry approaches: the same option becomes far more sensitive near the strike and nearly inert away from it.*
+
+![Gamma through time, at three spot levels](docs/gamma-through-time.png)
+
+*The same gamma through time, for an in-the-money, at-the-money and out-of-the-money spot. Only the at-the-money option's gamma explodes into expiry, which is why a desk watches the strikes it is pinned to.*
+
+
 ## Features
 
 **Vanilla options**
