@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7        # download your code
+      - uses: astral-sh/setup-uv@v10     # install uv
+      - run: uv sync --locked            # build .venv from uv.lock (fails if the lock is outdated)
+      - run: uv run ruff check .         # lint
+      - run: uv run pytest --cov=optionlab --cov-report=term-missing --cov-fail-under=80
