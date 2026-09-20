@@ -1,0 +1,55 @@
+# Look and feel of the OptionLab app.
+# Colours are aligned with optionlab/plotting/theme.py so that Streamlit widgets
+# and Plotly figures read as one design system.
+
+[theme]
+base = "dark"
+primaryColor = "#3987e5"              # library "call" blue: buttons, active widgets
+backgroundColor = "#111418"           # near-black page
+secondaryBackgroundColor = "#1a1f26"  # cards, widgets, sidebar panels
+codeBackgroundColor = "#1a1f26"
+textColor = "#e8eaed"
+linkColor = "#6aa9ee"
+borderColor = "#2c333c"
+codeTextColor = "#c3c2b7"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "8px"
+buttonRadius = "8px"
+linkUnderline = false
+
+font = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+baseFontSize = 15
+headingFontSizes = ["30px", "23px", "19px", "16px", "14px", "13px"]
+headingFontWeights = [700, 600, 600, 600, 500, 500]
+
+# Semantic colours (badges, metric deltas) — the trading convention.
+greenColor = "#199e70"
+redColor = "#d03b3b"
+yellowColor = "#c98500"
+orangeColor = "#d95926"
+blueColor = "#3987e5"
+violetColor = "#9085e9"
+grayColor = "#898781"
+
+# Native charts use the same categorical palette as the library's figures.
+chartCategoricalColors = [
+    "#3987e5",
+    "#d95926",
+    "#199e70",
+    "#c98500",
+    "#d55181",
+    "#008300",
+    "#9085e9",
+    "#e66767",
+]
+
+dataframeBorderColor = "#2c333c"
+dataframeHeaderBackgroundColor = "#1a1f26"
+
+[theme.sidebar]
+backgroundColor = "#0d1014"
+secondaryBackgroundColor = "#1a1f26"
+borderColor = "#2c333c"

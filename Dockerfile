@@ -9,8 +9,11 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev
 
-# 2) Then the code
+# 2) Then the code: the library, the app shell, its pages and the theme
 COPY optionlab ./optionlab
+COPY app_lib ./app_lib
+COPY app_pages ./app_pages
+COPY .streamlit ./.streamlit
 COPY app.py ./
 
 ENV PATH="/app/.venv/bin:$PATH"

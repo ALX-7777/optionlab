@@ -94,13 +94,26 @@ streamlit run app.py
 
 ## The Streamlit app
 
-| Tab | What you can do |
-|---|---|
-| **Vanilla Greeks** | Choose a call or a put, its strike and expiry, see every Greek against the spot, and watch one Greek change as expiry approaches |
-| **Strategies** | Pick any of the 37 strategies and see its description, net premium, maximum profit and loss, and payoff diagram |
-| **My book** | Trade the option from the first tab and follow your positions, Greeks and P&L |
+Seven pages, in two groups. The market (spot, volatility, interest rate, dividend yield) is set once in the sidebar, and every page prices in it.
 
-You set the market (spot, volatility, interest rate, dividend yield) in the sidebar, and every tab uses it.
+**Learn**
+
+| Page | What you can do |
+|---|---|
+| **Start here** | A live snapshot of the current market, how a desk's view of risk fits together, and a reference card for the Greeks |
+| **Greeks explorer** | One option at a time, seen seven ways: against spot, through time, against volatility, as a surface, compared with other strikes and maturities, and through its P&L. Includes an implied-volatility calculator |
+| **Strategies** | All 37 structures, by family, with payoff, breakevens, maximum profit and loss, leg-by-leg Greeks, and a side-by-side comparison of any two |
+| **Exotics** | Digitals, barriers, Asians and lookbacks against the vanilla a trader would compare them with, plus sample paths, call-spread replication and a Monte Carlo check |
+
+**Practice**
+
+| Page | What you can do |
+|---|---|
+| **My book** | Trade anything you build into one book, then read its risk: ladders, a spot × volatility heatmap, stress tests and hedging tools. Save and reload it as JSON |
+| **Trading simulator** | Run the book forward day by day in a market where realised volatility differs from implied, hedge on a rule, and see the P&L split by Greek |
+| **Interview drills** | Self-marked quick-fire questions, the mental-maths shortcuts traders use, flashcards, a question bank with model answers, and story prompts |
+
+Every chart comes with a "how to read this" box, the things to notice, and how the same idea is asked about in an interview.
 
 ## Example scripts
 
@@ -158,7 +171,7 @@ Conventions:
 | Lint | `uv run ruff check .` |
 | Add a dependency | `uv add <package>`, then regenerate `requirements.txt` with `uv export --format requirements.txt --no-dev --no-hashes -o requirements.txt` |
 
-The test suite has **1,314 tests** and covers **98%** of the library.
+The test suite has **1,504 tests** — the library, plus every page of the app driven headless through Streamlit's `AppTest` — and covers **98%** of the library.
 
 ## Docker
 
@@ -197,7 +210,10 @@ GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs on 
 
 ```
 .
-├── app.py                  # Streamlit app
+├── app.py                  # Streamlit app: theme, navigation, shared market
+├── app_pages/              # one file per page of the app
+├── app_lib/                # session state and the shared UI components
+├── .streamlit/config.toml  # the app's theme
 ├── optionlab/              # the library
 │   ├── market.py           # market state: spot, volatility, rate, dividend, time
 │   ├── black_scholes.py    # prices, Greeks, implied volatility
