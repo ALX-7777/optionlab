@@ -104,7 +104,7 @@ class TestDigitalPricing:
         np.testing.assert_allclose(call.probability_itm(mkt) + put.probability_itm(mkt), 1.0, rtol=1e-12)
         assert isinstance(call.probability_itm(Market(100.0, 0.25)), float)
 
-    @pytest.mark.parametrize("kind,option_type", itertools.product(("cash", "asset"), OPTION_TYPES))
+    @pytest.mark.parametrize("kind,option_type", list(itertools.product(("cash", "asset"), OPTION_TYPES)))
     def test_monte_carlo_agrees(self, kind, option_type):
         digital = DigitalOption(option_type, 105.0, 0.75, 1.0 if kind == "asset" else 20.0, kind)
         mkt = Market(100.0, 0.3, 0.05, 0.02)
@@ -113,7 +113,7 @@ class TestDigitalPricing:
 
 
 class TestDigitalGreeks:
-    @pytest.mark.parametrize("kind,option_type", itertools.product(("cash", "asset"), OPTION_TYPES))
+    @pytest.mark.parametrize("kind,option_type", list(itertools.product(("cash", "asset"), OPTION_TYPES)))
     def test_analytic_greeks_match_bump_and_reprice(self, kind, option_type):
         digital = DigitalOption(option_type, 100.0, 0.85, 7.0 if kind == "cash" else 0.5, kind)
         mkt = Market(np.array([80.0, 95.0, 100.0, 104.0, 125.0]), 0.25, 0.05, 0.02, t=0.1)
@@ -173,7 +173,7 @@ class TestDigitalEdgeCases:
             DigitalOption("put", 100.0, 1.0, 2.0, "asset").payoff(spots), [180.0, 0, 0, 0])
 
     @pytest.mark.parametrize("t", [1.0, 1.5])
-    @pytest.mark.parametrize("kind,option_type", itertools.product(("cash", "asset"), OPTION_TYPES))
+    @pytest.mark.parametrize("kind,option_type", list(itertools.product(("cash", "asset"), OPTION_TYPES)))
     def test_settlement_at_and_after_expiry(self, kind, option_type, t):
         digital = DigitalOption(option_type, 100.0, 1.0, 3.0, kind)
         spots = np.array([80.0, 100.0, 125.0])
@@ -270,7 +270,7 @@ class TestCallSpreadReplication:
         assert legs == {long_strike: pytest.approx(5.0), short_strike: pytest.approx(-5.0)}
         assert all(leg.instrument.option_type == option_type for leg in spread.legs)
 
-    @pytest.mark.parametrize("kind,option_type", itertools.product(("cash", "asset"), OPTION_TYPES))
+    @pytest.mark.parametrize("kind,option_type", list(itertools.product(("cash", "asset"), OPTION_TYPES)))
     def test_centered_spread_converges_quadratically(self, kind, option_type):
         digital = DigitalOption(option_type, 105.0, 1.0, 10.0 if kind == "cash" else 1.0, kind)
         exact = digital.price(self.MKT)
@@ -278,7 +278,7 @@ class TestCallSpreadReplication:
         assert errors[2] < 0.01 * exact
         assert 3.5 < errors[0] / errors[1] < 4.5 and 3.5 < errors[1] / errors[2] < 4.5
 
-    @pytest.mark.parametrize("kind,option_type", itertools.product(("cash", "asset"), OPTION_TYPES))
+    @pytest.mark.parametrize("kind,option_type", list(itertools.product(("cash", "asset"), OPTION_TYPES)))
     def test_payoff_matches_outside_the_ramp(self, kind, option_type):
         digital = DigitalOption(option_type, 100.0, 1.0, 3.0, kind)
         spots = np.array([50.0, 95.0, 98.99, 101.01, 105.0, 170.0])

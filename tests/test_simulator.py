@@ -679,21 +679,23 @@ class TestHedgingExperiment:
 # ---------------------------------------------------------------------- #
 # Figures
 # ---------------------------------------------------------------------- #
+@pytest.fixture(scope="module")
+def history() -> pd.DataFrame:
+    mkt = Market(spot=100.0, vol=0.2, rate=0.02, div=0.01)
+    book = Book("figures")
+    book.trade(EuropeanOption("call", 100.0, 0.25), 100, mkt)
+    scenario = gbm_scenario(mkt, 0.25, 30, realized_vol=0.3, implied_vol_model="spot_correlated", seed=3)
+    return TradingSimulator(book, scenario, DeltaHedgeEveryN(1), costs=TransactionCosts(stock_bps=5)).run()
+
+
+@pytest.fixture(scope="module")
+def experiment() -> pd.DataFrame:
+    mkt = Market(spot=100.0, vol=0.2)
+    return delta_hedging_experiment(EuropeanOption("call", 100.0, 0.25), mkt, n_paths=300, seed=1,
+                                    rebalance_steps_list=(4, 16, 64))
+
+
 class TestFigures:
-    @pytest.fixture(scope="class")
-    def history(self) -> pd.DataFrame:
-        mkt = Market(spot=100.0, vol=0.2, rate=0.02, div=0.01)
-        book = Book("figures")
-        book.trade(EuropeanOption("call", 100.0, 0.25), 100, mkt)
-        scenario = gbm_scenario(mkt, 0.25, 30, realized_vol=0.3, implied_vol_model="spot_correlated", seed=3)
-        return TradingSimulator(book, scenario, DeltaHedgeEveryN(1), costs=TransactionCosts(stock_bps=5)).run()
-
-    @pytest.fixture(scope="class")
-    def experiment(self) -> pd.DataFrame:
-        mkt = Market(spot=100.0, vol=0.2)
-        return delta_hedging_experiment(EuropeanOption("call", 100.0, 0.25), mkt, n_paths=300, seed=1,
-                                        rebalance_steps_list=(4, 16, 64))
-
     @pytest.mark.parametrize("mode", ["auto", "light", "dark"])
     def test_simulation_figures_build(self, history, mode):
         figures = [
